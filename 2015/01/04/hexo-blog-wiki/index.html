@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="AEwKHvOWNqrIhtqouotdW_pHO0lGcAIUc_Dzfo4T894">
+
+
+
+  <meta name="msvalidate.01" content="6F83C300A4B93AB7A45420F532B43FFE">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1. Hexo安装使用安装参考官方文档说明 配置在_config.yml文件中，我们可以配置Hexo博客。  skip_render选项  Hexo默认会渲染source文件下的所有的*.md和*.html文件。配置该选项，我们可以让Hexo在生成网站文件的时候跳过某些文件，比如用于域名所有权验证的HTML文件或者github仓库的Readme文件。 skip_render:  - xxx.htm">
+<meta name="keywords" content="Hexo,技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo博客Wiki">
+<meta property="og:url" content="http://blog.pzxbc.com/2015/01/04/hexo-blog-wiki/index.html">
+<meta property="og:site_name" content="PZXBC&#39;s blog">
+<meta property="og:description" content="1. Hexo安装使用安装参考官方文档说明 配置在_config.yml文件中，我们可以配置Hexo博客。  skip_render选项  Hexo默认会渲染source文件下的所有的*.md和*.html文件。配置该选项，我们可以让Hexo在生成网站文件的时候跳过某些文件，比如用于域名所有权验证的HTML文件或者github仓库的Readme文件。 skip_render:  - xxx.htm">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2015-11-28T16:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo博客Wiki">
+<meta name="twitter:description" content="1. Hexo安装使用安装参考官方文档说明 配置在_config.yml文件中，我们可以配置Hexo博客。  skip_render选项  Hexo默认会渲染source文件下的所有的*.md和*.html文件。配置该选项，我们可以让Hexo在生成网站文件的时候跳过某些文件，比如用于域名所有权验证的HTML文件或者github仓库的Readme文件。 skip_render:  - xxx.htm">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="PZXBC's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://blog.pzxbc.com/2015/01/04/hexo-blog-wiki/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Hexo博客Wiki | PZXBC's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-19482318-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-19482318-2');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PZXBC's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">学以致用</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">60</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">12</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">44</span></a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.pzxbc.com/2015/01/04/hexo-blog-wiki/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="希望能够每天提升一点~~~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PZXBC's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hexo博客Wiki
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-01-05 0:00:00" itemprop="dateCreated datePublished" datetime="2015-01-05T00:00:00+08:00">2015-01-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2015-11-29 0:00:00" itemprop="dateModified" datetime="2015-11-29T00:00:00+08:00">2015-11-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/站点相关/" itemprop="url" rel="index"><span itemprop="name">站点相关</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/01/04/hexo-blog-wiki/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2015/01/04/hexo-blog-wiki/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2015/01/04/hexo-blog-wiki/" class="leancloud_visitors" data-flag-title="Hexo博客Wiki">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-Hexo安装使用"><a href="#1-Hexo安装使用" class="headerlink" title="1. Hexo安装使用"></a>1. Hexo安装使用</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>参考<a href="https://hexo.io/docs/index.html" target="_blank" rel="noopener">官方文档</a>说明</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在<code>_config.yml</code>文件中，我们可以配置Hexo博客。</p>
+<ul>
+<li><strong>skip_render选项</strong></li>
+</ul>
+<p>Hexo默认会渲染<code>source</code>文件下的所有的<code>*.md</code>和<code>*.html</code>文件。配置该选项，我们可以让Hexo在生成网站文件的时候跳过某些文件，比如用于域名所有权验证的HTML文件或者github仓库的Readme文件。</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">skip_render:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">xxx.html</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">readme.md</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建新的站点</span></span><br><span class="line">hexo init [folder]</span><br><span class="line"><span class="comment"># 创建新的文章</span></span><br><span class="line">hexo new [layout] &lt;title&gt;</span><br><span class="line"><span class="comment"># 发布草稿</span></span><br><span class="line">hexo publish [layout] &lt;filename&gt;</span><br><span class="line"><span class="comment"># 启动一个本地Server，并显示草稿文章</span></span><br><span class="line"><span class="comment"># 默认的地址为: http://localhost:4000/</span></span><br><span class="line">hexo server --draft</span><br><span class="line"><span class="comment"># 生成静态文件</span></span><br><span class="line">hexo generate</span><br><span class="line"><span class="comment"># 部署</span></span><br><span class="line">hexo deploy</span><br><span class="line"><span class="comment"># 清除</span></span><br><span class="line"><span class="comment"># 清除缓存文件(db.json)和生成的文件(public/)</span></span><br><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="2-Hexo主题使用"><a href="#2-Hexo主题使用" class="headerlink" title="2. Hexo主题使用"></a>2. Hexo主题使用</h2><h3 id="主题安装使用"><a href="#主题安装使用" class="headerlink" title="主题安装使用"></a>主题安装使用</h3><p>在Hexo站点目录下执行下面命令，然后修改<code>_config.yml</code>中的<code>theme</code>字段为<code>theme-name</code>。你可以在<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="noopener">Hexo主题库</a>寻找你喜欢的主题。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;repository&gt; themes/&lt;theme-name&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>git clone完成后，我们就可以将<code>themes/&lt;theme-name&gt;</code>目录下的.git目录删除了</p>
+</blockquote>
+<h3 id="yilia主题的配置"><a href="#yilia主题的配置" class="headerlink" title="yilia主题的配置"></a>yilia主题的配置</h3><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 头像设置 将图片放在主题目录下的source/img文件夹下</span></span><br><span class="line"><span class="attr">avatar:</span> <span class="string">"/img/avatar.jpg"</span></span><br><span class="line"><span class="comment"># 多说设置，如果需要开启，填的是你在多说上申请的项目名称. </span></span><br><span class="line"><span class="comment"># (PS: 登陆www.duoshuo.com, 然后点我要安装就会看到项目申请, 记得用引号引起项目名称)</span></span><br><span class="line"><span class="attr">duoshuo:</span> <span class="string">"项目名称"</span></span><br><span class="line"><span class="comment"># 谷歌统计</span></span><br><span class="line"><span class="attr">google_analytics:</span> <span class="string">'跟踪ID'</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-Hexo博客使用Github与Gitcafe托管"><a href="#3-Hexo博客使用Github与Gitcafe托管" class="headerlink" title="3. Hexo博客使用Github与Gitcafe托管"></a>3. Hexo博客使用Github与Gitcafe托管</h2><h3 id="博客托管"><a href="#博客托管" class="headerlink" title="博客托管"></a>博客托管</h3><p>Github与Gitcafe通过Pages服务提供了静态网站的托管服务。Pages分为两种：个人/组织的Pages和项目Pages；一般我们使用个人/组织Pages来托管Hexo博客。</p>
+<p>个人/组织的Pages都是一个特殊名字的项目。在Github中个人/组织Pages的项目名必须为<code>username.github.io</code>，在Gitcafe中项目名必须为<code>username</code>。</p>
+<ul>
+<li><a href="https://help.github.com/categories/github-pages-basics/" target="_blank" rel="noopener">Github Pages帮助</a></li>
+<li><a href="https://gitcafe.com/GitCafe/Help/wiki/Pages-%E7%9B%B8%E5%85%B3%E5%B8%AE%E5%8A%A9" target="_blank" rel="noopener">Gitcafe Pages帮助</a></li>
+</ul>
+<p>在创建好Pages项目后，我们需要配置<code>_config.yml</code>文件中的<code>deploy</code>字段<br><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">- type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="attr">https://github.com/pzxbc/pzxbc.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br><span class="line"><span class="attr">- type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="attr">https://gitcafe.com/pzxbc/pzxbc.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">gitcafe-pages</span></span><br></pre></td></tr></table></figure></p>
+<p>配置完成后，运行下面指令部署博客<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;hexo-websit-dir&gt;</span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用自定义域名"><a href="#使用自定义域名" class="headerlink" title="使用自定义域名"></a>使用自定义域名</h3><p>在将博客托管至Github和GitCafe后，我们可以使用域名<code>username.[github|gitcafe].io</code>来访问我们的博客。如果你自己拥有一个域名的话，可以设置使用该域名(<code>blog.xxx.com</code>)来访问博客。</p>
+<ol>
+<li>将<code>username.[github|gitcafe].com</code>域名重定向到我们要使用的域名<code>blog.xxx.com</code>。<ul>
+<li>对于Github，需要在Pages项目的根目录添加一个<em>CNAME</em>文件，文件内容为你要使用的域名<code>blog.xxx.com</code>；即在Hexo站点目录下的<code>source</code>目录添加<em>CNAME</em>文件；</li>
+<li>对于Gitcafe，在Pages项目的设置中添加你的域名即可；</li>
+</ul>
+</li>
+<li>设置CNAME记录。在步骤1后，我们访问<code>username.[github|gitcafe].io</code>后，网页会重定向到域名<code>blog.xxx.com</code>。为了能通过域名<code>blog.xxx.com</code>访问到我们的博客，我们应该将域名指向我们博客所在的服务器。添加下面的CNAME记录，使得<code>blog.xxx.com</code>解析为博客所在的服务器IP地址。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>主机记录</th>
+<th>记录类型</th>
+<th>线路类型</th>
+<th>记录值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blog</td>
+<td>CNAME</td>
+<td>默认</td>
+<td>username.github.io</td>
+</tr>
+<tr>
+<td>blog</td>
+<td>CNAME</td>
+<td>国内</td>
+<td>username.gitcafe.io</td>
+</tr>
+</tbody>
+</table>
+<p>经过上面设置后，我们在国内线路访问<code>blog.xxx.com</code>会访问到<code>username.githcafe.io</code>指向的服务器上的博客，通过国外线路会访问到<code>username.github.io</code>指向的服务器。这样也加速了我们博客打开的速度，因为gitcafe对于国内访问来说会快很多；同时也使得百度能够索引我们的站点，因为github屏蔽了百度的爬虫。</p>
+<p>配置完成后，我们可以通过下面命令确认是否成功(CNAME记录需要一段时间才能生效)<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ping pzxbc.github.io</span><br><span class="line"><span class="comment"># PING github.map.fastly.net (103.245.222.133) 56(84) bytes of data.</span></span><br><span class="line"><span class="comment"># 64 bytes from 103.245.222.133: icmp_seq=1 ttl=51 time=326 ms</span></span><br><span class="line"><span class="comment"># 64 bytes from 103.245.222.133: icmp_seq=2 ttl=51 time=297 ms</span></span><br><span class="line">ping pzxbc.gitcafe.io</span><br><span class="line"><span class="comment"># PING pzxbc.gitcafe.io (103.56.54.5) 56(84) bytes of data.</span></span><br><span class="line"><span class="comment"># 64 bytes from 103.56.54.5: icmp_seq=1 ttl=54 time=12.6 ms</span></span><br><span class="line"><span class="comment"># 64 bytes from 103.56.54.5: icmp_seq=2 ttl=54 time=12.3 ms</span></span><br><span class="line">dig blog.pzxbc.com +nostats +nocomments +nocmd</span><br><span class="line"><span class="comment"># ;blog.pzxbc.com.            IN  A</span></span><br><span class="line"><span class="comment"># blog.pzxbc.com.     600 IN  CNAME   pzxbc.gitcafe.io.</span></span><br><span class="line"><span class="comment"># pzxbc.gitcafe.io.   600 IN  A   103.56.54.5</span></span><br><span class="line">ping blog.pzxbc.com</span><br><span class="line"><span class="comment"># PING pzxbc.gitcafe.io (103.56.54.5) 56(84) bytes of data.</span></span><br><span class="line"><span class="comment"># 64 bytes from 103.56.54.5: icmp_seq=1 ttl=54 time=11.8 ms</span></span><br><span class="line"><span class="comment"># 64 bytes from 103.56.54.5: icmp_seq=2 ttl=54 time=12.6 ms</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/" target="_blank" rel="noopener">Github Pages自定义域名访问官方文档</a><br><a href="https://gitcafe.com/GitCafe/Help/wiki/Pages-%E7%9B%B8%E5%85%B3%E5%B8%AE%E5%8A%A9" target="_blank" rel="noopener">Gitcafe Pages自定义域名访问官方文档</a></p>
+</blockquote>
+<h2 id="4-Hexo站点git管理"><a href="#4-Hexo站点git管理" class="headerlink" title="4. Hexo站点git管理"></a>4. Hexo站点git管理</h2><h3 id="使用git管理"><a href="#使用git管理" class="headerlink" title="使用git管理"></a>使用git管理</h3><ol>
+<li>在<strong>github</strong>上创建一个新的仓库<code>github-blog</code>用于管理Hexo站点文件</li>
+<li>将Hexo站点本地文件推送到<code>github-blog</code>仓库中<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> hexo-website-dir</span><br><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git remote add origin https://github.com/pzxbc/github-blog.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="同步站点文件至其他机器使用"><a href="#同步站点文件至其他机器使用" class="headerlink" title="同步站点文件至其他机器使用"></a>同步站点文件至其他机器使用</h3><p>在使用了git管理我们的站点文件后，我们就拥有了博文回退、同步、协同创作的功能。我们可以轻松地将我们的站点文件同步至其他机器进行博文的编写和发布。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pzxbc/github-blog.git &lt;website-dir&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;website-dir&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>其他机器上要确保安装了Node.js和Hexo环境</p>
+</blockquote>
+<h2 id="5-插件"><a href="#5-插件" class="headerlink" title="5. 插件"></a>5. 插件</h2><h3 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">npm install &lt;plugin-name&gt; --save</span><br><span class="line"><span class="comment"># 更新</span></span><br><span class="line">npm update</span><br><span class="line"><span class="comment"># 卸载</span></span><br><span class="line">npm uninstall &lt;plugin-name&gt; --save</span><br></pre></td></tr></table></figure>
+<h3 id="插件集合"><a href="#插件集合" class="headerlink" title="插件集合"></a>插件集合</h3><ul>
+<li><a href="https://github.com/hexojs/hexo/wiki/Plugins" target="_blank" rel="noopener">旧的Wiki</a></li>
+<li><a href="https://hexo.io/plugins/" target="_blank" rel="noopener">新的插件展示</a></li>
+</ul>
+<h3 id="使用的插件"><a href="#使用的插件" class="headerlink" title="使用的插件"></a>使用的插件</h3><ul>
+<li><a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="noopener">Feeds</a></li>
+<li><a href="https://github.com/hexojs/hexo-generator-sitemap" target="_blank" rel="noopener">Sitemap</a></li>
+<li><a href="https://github.com/coneycode/hexo-generator-baidu-sitemap" target="_blank" rel="noopener">BaiduSitemap</a></li>
+<li><a href="https://github.com/jaredly/hexo-admin" target="_blank" rel="noopener">文章后台管理</a></li>
+<li><a href="https://github.com/hexojs/hexo-browsersync" target="_blank" rel="noopener">修改浏览器同步刷新</a></li>
+</ul>
+<h2 id="6-Hexo版本升级"><a href="#6-Hexo版本升级" class="headerlink" title="6. Hexo版本升级"></a>6. Hexo版本升级</h2><p>根据<a href="https://github.com/hexojs/hexo/wiki/Migrating-from-2.x-to-3.0" target="_blank" rel="noopener">官方文档</a>进行操作即可</p>
+<p>从2.X版本升至3.0的还需要更改<code>_config.yml</code>的<code>deploy</code>选项作，才能正常运行<code>hexo deploy</code>命令<br><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="7-Hexo博客自动部署"><a href="#7-Hexo博客自动部署" class="headerlink" title="7. Hexo博客自动部署"></a>7. Hexo博客自动部署</h2><p>参考<a href="http://blog.acwong.org/2016/03/20/auto-deploy-hexo-with-travis-CI/" target="_blank" rel="noopener">这里</a></p>
+<a href="/2015/01/04/hexo-blog-wiki/hexo-auto-deploy-by-travis-CI.pdf" title="PDF备份">PDF备份</a>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2015/11/15/hexo-writing/" rel="bookmark">Hexo写作</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2015/11/16/hexo-post-example/" rel="bookmark">Hexo示例文章</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/03/24/hexo-migrate-coding-net/" rel="bookmark">Hexo博客迁移至Coding.net</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/11/09/技术/每周整理/2018-11-09-summary/" rel="bookmark">2018-11-09周度</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/02/23/server-develop/" rel="bookmark">服务端技术开发</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/01/01/技术/站点相关/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/15/hexo-writing/" rel="prev" title="Hexo写作">
+                Hexo写作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Author</p>
+              <p class="site-description motion-element" itemprop="description">希望能够每天提升一点~~~</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/pzxbc" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:pzxbc@qq.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-nd.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Hexo安装使用"><span class="nav-number">1.</span> <span class="nav-text">1. Hexo安装使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">1.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">1.3.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Hexo主题使用"><span class="nav-number">2.</span> <span class="nav-text">2. Hexo主题使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主题安装使用"><span class="nav-number">2.1.</span> <span class="nav-text">主题安装使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yilia主题的配置"><span class="nav-number">2.2.</span> <span class="nav-text">yilia主题的配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Hexo博客使用Github与Gitcafe托管"><span class="nav-number">3.</span> <span class="nav-text">3. Hexo博客使用Github与Gitcafe托管</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#博客托管"><span class="nav-number">3.1.</span> <span class="nav-text">博客托管</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用自定义域名"><span class="nav-number">3.2.</span> <span class="nav-text">使用自定义域名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Hexo站点git管理"><span class="nav-number">4.</span> <span class="nav-text">4. Hexo站点git管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用git管理"><span class="nav-number">4.1.</span> <span class="nav-text">使用git管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步站点文件至其他机器使用"><span class="nav-number">4.2.</span> <span class="nav-text">同步站点文件至其他机器使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-插件"><span class="nav-number">5.</span> <span class="nav-text">5. 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插件使用"><span class="nav-number">5.1.</span> <span class="nav-text">插件使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件集合"><span class="nav-number">5.2.</span> <span class="nav-text">插件集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用的插件"><span class="nav-number">5.3.</span> <span class="nav-text">使用的插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Hexo版本升级"><span class="nav-number">6.</span> <span class="nav-text">6. Hexo版本升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Hexo博客自动部署"><span class="nav-number">7.</span> <span class="nav-text">7. Hexo博客自动部署</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Author</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">86k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:23</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'EzRRCR6TWWbI6tznEWKbd5MH-gzGzoHsz',
+        appKey: 'rWMYX8Xg9HiykSb6BrfvF0fD',
+        placeholder: 'Just go go',
+        avatar:'wavatar',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: true
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

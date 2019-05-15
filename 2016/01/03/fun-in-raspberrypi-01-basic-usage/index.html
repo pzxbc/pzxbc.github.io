@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="AEwKHvOWNqrIhtqouotdW_pHO0lGcAIUc_Dzfo4T894">
+
+
+
+  <meta name="msvalidate.01" content="6F83C300A4B93AB7A45420F532B43FFE">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1. 介绍树莓派(Raspberry Pi)是一款卡片大小的单板机电脑。它由英国树莓派基金会所开发，目的是以低价硬件及自由软件刺激学校的基本计算机科学教育。有关它的历史、硬件规格及可使用的操作系统请参考树莓派维基百科 这篇文章以及后续相关文章中树莓派的型号及配置环境如下：  树莓派B型(第2代) 16G MicroSD卡 Raspbian Jessie (百度云高速下载)">
+<meta name="keywords" content="技术,树莓派">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派折腾记：基础使用">
+<meta property="og:url" content="http://blog.pzxbc.com/2016/01/03/fun-in-raspberrypi-01-basic-usage/index.html">
+<meta property="og:site_name" content="PZXBC&#39;s blog">
+<meta property="og:description" content="1. 介绍树莓派(Raspberry Pi)是一款卡片大小的单板机电脑。它由英国树莓派基金会所开发，目的是以低价硬件及自由软件刺激学校的基本计算机科学教育。有关它的历史、硬件规格及可使用的操作系统请参考树莓派维基百科 这篇文章以及后续相关文章中树莓派的型号及配置环境如下：  树莓派B型(第2代) 16G MicroSD卡 Raspbian Jessie (百度云高速下载)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2016-01-03T08:13:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="树莓派折腾记：基础使用">
+<meta name="twitter:description" content="1. 介绍树莓派(Raspberry Pi)是一款卡片大小的单板机电脑。它由英国树莓派基金会所开发，目的是以低价硬件及自由软件刺激学校的基本计算机科学教育。有关它的历史、硬件规格及可使用的操作系统请参考树莓派维基百科 这篇文章以及后续相关文章中树莓派的型号及配置环境如下：  树莓派B型(第2代) 16G MicroSD卡 Raspbian Jessie (百度云高速下载)">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="PZXBC's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://blog.pzxbc.com/2016/01/03/fun-in-raspberrypi-01-basic-usage/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>树莓派折腾记：基础使用 | PZXBC's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-19482318-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-19482318-2');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PZXBC's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">学以致用</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">60</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">12</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">44</span></a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.pzxbc.com/2016/01/03/fun-in-raspberrypi-01-basic-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="希望能够每天提升一点~~~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PZXBC's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">树莓派折腾记：基础使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-01-03 16:13:20" itemprop="dateCreated datePublished" datetime="2016-01-03T16:13:20+08:00">2016-01-03</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/硬件相关/" itemprop="url" rel="index"><span itemprop="name">硬件相关</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/01/03/fun-in-raspberrypi-01-basic-usage/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2016/01/03/fun-in-raspberrypi-01-basic-usage/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/01/03/fun-in-raspberrypi-01-basic-usage/" class="leancloud_visitors" data-flag-title="树莓派折腾记：基础使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p><a href="https://www.raspberrypi.org/" target="_blank" rel="noopener">树莓派</a>(Raspberry Pi)是一款卡片大小的单板机电脑。它由英国树莓派基金会所开发，目的是以低价硬件及自由软件刺激学校的基本计算机科学教育。有关它的历史、硬件规格及可使用的操作系统请参考<a href="https://zh.wikipedia.org/wiki/%E6%A0%91%E8%8E%93%E6%B4%BE" target="_blank" rel="noopener">树莓派维基百科</a></p>
+<p>这篇文章以及后续相关文章中树莓派的型号及配置环境如下：</p>
+<ul>
+<li>树莓派B型(第2代)</li>
+<li>16G MicroSD卡</li>
+<li>Raspbian Jessie (<a href="http://pan.baidu.com/s/1ntTT0rn" target="_blank" rel="noopener">百度云高速下载</a>)</li>
+</ul>
+<a id="more"></a>
+<h2 id="2-必备配件"><a href="#2-必备配件" class="headerlink" title="2. 必备配件"></a>2. 必备配件</h2><p>如果是单独购买树莓派的话，只会有一块单板机。要想让树莓派运转起来，还需要下面配件。</p>
+<ul>
+<li><strong>电源适配器</strong>，普通手机的USB充电器(额定输出电压为5V)即可，树莓派的电源接口是MicroUSB接口，所以你还需准备一条MicroUSB的接口线。另外电源的额定输出电流最好为1A~2A，低于1A的输出电流可能会导致树莓派运行不稳定</li>
+<li><strong>MicroSD存储卡</strong>，官方推荐8G以上</li>
+<li><strong>网线</strong>，连接树莓派与路由器</li>
+</ul>
+<h2 id="3-系统安装"><a href="#3-系统安装" class="headerlink" title="3. 系统安装"></a>3. 系统安装</h2><p><strong>Raspbian</strong>系统是树莓派官方支持的系统，是在<strong>Debian</strong>的基础上针对树莓派的硬件进行优化修改的。最简易的系统安装方法是使用<strong>NOOBS</strong>，这是一个图形化的系统安装工具，但是需要显示器。</p>
+<p>下面介绍的安装方法类似以前Windows的ghost系统安装方法，无需显示器。</p>
+<ol>
+<li>下载<a href="http://pan.baidu.com/s/1dEwAcnv" target="_blank" rel="noopener">Win32 Disk Imager</a>并安装。</li>
+<li>下载<a href="http://pan.baidu.com/s/1ntTT0rn" target="_blank" rel="noopener">Raspbian Jessie</a>系统，解压得到IMG文件。</li>
+<li>将要写入<strong>Raspbian Jessie</strong>系统的Micro SD卡插入电脑。</li>
+<li>打开<strong>Win32 Disk Imager</strong>，在界面里选择下载的树莓派系统IMG文件以及MicroSD卡盘符，点击<strong>Write</strong>按钮(<strong>确保MicroSD卡盘符正确</strong>)。</li>
+<li>当完成镜像写入MicroSD操作后，系统就已成功安装到MicroSD卡中。</li>
+</ol>
+<blockquote>
+<p><strong>Tips:</strong> <strong>Win32 Disk Imager</strong>界面中<strong>Read</strong>按钮可以用来备份树莓派系统</p>
+</blockquote>
+<h2 id="4-登陆系统"><a href="#4-登陆系统" class="headerlink" title="4. 登陆系统"></a>4. 登陆系统</h2><p>将之前安装好系统的MicroSD卡插入树莓派中，并给树莓派插上电源。树莓派就会启动并进入<strong>Raspbian</strong>系统。由于没有显示器，我们可以使用<strong>SSH</strong>的方式登陆系统来使用树莓派。</p>
+<ol>
+<li>用网线将树莓派接入路由器中，在路由器管理页面中查看树莓派IP地址。</li>
+<li>打开<a href="http://pan.baidu.com/s/1gdNuew7" target="_blank" rel="noopener">SSH登陆工具</a>，配置SSH连接，SSH端口为22，登陆账号为<code>pi</code>，账号密码为<code>raspberry</code>。</li>
+<li>配置完成后点击连接，我们就登陆进<strong>Raspbian</strong>系统中。</li>
+</ol>
+<h2 id="5-Raspbian基本使用"><a href="#5-Raspbian基本使用" class="headerlink" title="5. Raspbian基本使用"></a>5. Raspbian基本使用</h2><p><strong>Raspbian</strong>是基于<strong>Debian</strong>，如果你熟悉Linux的基本操作，那么使用Raspbian系统时就不会遇到什么问题。</p>
+<h3 id="5-1-配置Raspbian系统"><a href="#5-1-配置Raspbian系统" class="headerlink" title="5.1 配置Raspbian系统"></a>5.1 配置Raspbian系统</h3><p><strong>Raspbian</strong>提供了一个配置工具来配置系统，运行下面命令打开配置工具</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo raspbi-config</span><br></pre></td></tr></table></figure>
+<p>我们可以通过配置工具修改很多配置，一般需要修改的配置有下面一些。</p>
+<ol>
+<li>使用全部MicroSD卡存储空间(Expand Filesystem)</li>
+<li>更改账号密码</li>
+<li>更改时区(Internationalisation Options)</li>
+<li>更改语言环境(Internationalisation Options)(<strong>需要重启</strong>)</li>
+</ol>
+<h3 id="5-2-常用命令"><a href="#5-2-常用命令" class="headerlink" title="5.2 常用命令"></a>5.2 常用命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># root权限执行命令</span></span><br><span class="line">sudo xxx</span><br><span class="line"><span class="comment"># 关机</span></span><br><span class="line">sudo shutdown -h now</span><br><span class="line"><span class="comment"># 定时关机</span></span><br><span class="line">sudo shutdown -r 04:00:00</span><br><span class="line"><span class="comment"># 重启</span></span><br><span class="line">sudo reboot</span><br><span class="line"><span class="comment"># 安装软件</span></span><br><span class="line">sudo apt-get install xxx</span><br><span class="line"><span class="comment"># 后台执行命令</span></span><br><span class="line">nohup <span class="built_in">command</span> &amp;</span><br></pre></td></tr></table></figure>
+<h2 id="6-参考"><a href="#6-参考" class="headerlink" title="6. 参考"></a>6. 参考</h2><h3 id="6-1-Linux进程后台执行"><a href="#6-1-Linux进程后台执行" class="headerlink" title="6.1 Linux进程后台执行"></a>6.1 <a href="http://www.ibm.com/developerworks/cn/linux/l-cn-nohup/" target="_blank" rel="noopener">Linux进程后台执行</a></h3><h3 id="6-2-Debian中locale和语言环境"><a href="#6-2-Debian中locale和语言环境" class="headerlink" title="6.2 Debian中locale和语言环境"></a>6.2 Debian中locale和语言环境</h3><ol>
+<li><a href="http://serverfault.com/questions/54591/how-to-install-change-locale-on-debian" target="_blank" rel="noopener">http://serverfault.com/questions/54591/how-to-install-change-locale-on-debian</a></li>
+<li><a href="https://wiki.debian.org/Locale" target="_blank" rel="noopener">https://wiki.debian.org/Locale</a></li>
+<li><a href="https://wiki.debian.org/ChangeLanguage" target="_blank" rel="noopener">https://wiki.debian.org/ChangeLanguage</a></li>
+</ol>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/01/05/fun-in-raspberrypi-02-application-config/" rel="bookmark">树莓派折腾记：软件包管理器及应用设置</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/01/14/fun-in-raspberrypi-03-remote-access/" rel="bookmark">树莓派折腾记：远程访问</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/01/19/fun-in-raspberrypi-04-cloud-storage-on-pydio-installation/" rel="bookmark">树莓派折腾记：家庭私有云存储</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/03/22/gitlab-install-configure/" rel="bookmark">Gitlab安装配置及使用</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/03/08/raspberrypi-debian-startup-script-config/" rel="bookmark">Debian(树莓派)开机启动脚本设置</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+            <a href="/tags/树莓派/" rel="tag"># 树莓派</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/15/cocos2dx-game-design-01-new-game/" rel="next" title="Cocos2d-x游戏设计：创建新的游戏">
+                <i class="fa fa-chevron-left"></i> Cocos2d-x游戏设计：创建新的游戏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/05/fun-in-raspberrypi-02-application-config/" rel="prev" title="树莓派折腾记：软件包管理器及应用设置">
+                树莓派折腾记：软件包管理器及应用设置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Author</p>
+              <p class="site-description motion-element" itemprop="description">希望能够每天提升一点~~~</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/pzxbc" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:pzxbc@qq.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-nd.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-介绍"><span class="nav-number">1.</span> <span class="nav-text">1. 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-必备配件"><span class="nav-number">2.</span> <span class="nav-text">2. 必备配件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-系统安装"><span class="nav-number">3.</span> <span class="nav-text">3. 系统安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-登陆系统"><span class="nav-number">4.</span> <span class="nav-text">4. 登陆系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Raspbian基本使用"><span class="nav-number">5.</span> <span class="nav-text">5. Raspbian基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-配置Raspbian系统"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 配置Raspbian系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-常用命令"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-参考"><span class="nav-number">6.</span> <span class="nav-text">6. 参考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-Linux进程后台执行"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 Linux进程后台执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-Debian中locale和语言环境"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 Debian中locale和语言环境</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Author</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">86k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:23</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'EzRRCR6TWWbI6tznEWKbd5MH-gzGzoHsz',
+        appKey: 'rWMYX8Xg9HiykSb6BrfvF0fD',
+        placeholder: 'Just go go',
+        avatar:'wavatar',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: true
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

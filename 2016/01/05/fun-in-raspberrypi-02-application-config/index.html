@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="AEwKHvOWNqrIhtqouotdW_pHO0lGcAIUc_Dzfo4T894">
+
+
+
+  <meta name="msvalidate.01" content="6F83C300A4B93AB7A45420F532B43FFE">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="在基础使用一文中介绍了树莓派及其系统安装使用。本文介绍树莓派中软件包管理器的设置以及基础应用软件包的安装设置。 1 软件包管理器及软件源设置树莓派是基于Debian的系统，包管理器也是apt-get。关于apt-get的介绍、在软件安装中的作用以及与dkpg的关系请看Wiki。apt-get工具主要是处理软件包的各种依赖关系并获取软件安装过程需要的各种安装包，dkpg负责实际的软件安装工作。">
+<meta name="keywords" content="技术,树莓派">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派折腾记：软件包管理器及应用设置">
+<meta property="og:url" content="http://blog.pzxbc.com/2016/01/05/fun-in-raspberrypi-02-application-config/index.html">
+<meta property="og:site_name" content="PZXBC&#39;s blog">
+<meta property="og:description" content="在基础使用一文中介绍了树莓派及其系统安装使用。本文介绍树莓派中软件包管理器的设置以及基础应用软件包的安装设置。 1 软件包管理器及软件源设置树莓派是基于Debian的系统，包管理器也是apt-get。关于apt-get的介绍、在软件安装中的作用以及与dkpg的关系请看Wiki。apt-get工具主要是处理软件包的各种依赖关系并获取软件安装过程需要的各种安装包，dkpg负责实际的软件安装工作。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2016-01-05T08:21:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="树莓派折腾记：软件包管理器及应用设置">
+<meta name="twitter:description" content="在基础使用一文中介绍了树莓派及其系统安装使用。本文介绍树莓派中软件包管理器的设置以及基础应用软件包的安装设置。 1 软件包管理器及软件源设置树莓派是基于Debian的系统，包管理器也是apt-get。关于apt-get的介绍、在软件安装中的作用以及与dkpg的关系请看Wiki。apt-get工具主要是处理软件包的各种依赖关系并获取软件安装过程需要的各种安装包，dkpg负责实际的软件安装工作。">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="PZXBC's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://blog.pzxbc.com/2016/01/05/fun-in-raspberrypi-02-application-config/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>树莓派折腾记：软件包管理器及应用设置 | PZXBC's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-19482318-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-19482318-2');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PZXBC's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">学以致用</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">60</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">12</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">44</span></a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.pzxbc.com/2016/01/05/fun-in-raspberrypi-02-application-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="希望能够每天提升一点~~~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PZXBC's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">树莓派折腾记：软件包管理器及应用设置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-01-05 16:21:45" itemprop="dateCreated datePublished" datetime="2016-01-05T16:21:45+08:00">2016-01-05</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/硬件相关/" itemprop="url" rel="index"><span itemprop="name">硬件相关</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/01/05/fun-in-raspberrypi-02-application-config/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2016/01/05/fun-in-raspberrypi-02-application-config/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/01/05/fun-in-raspberrypi-02-application-config/" class="leancloud_visitors" data-flag-title="树莓派折腾记：软件包管理器及应用设置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">4.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在<a href="/2016/01/03/fun-in-raspberrypi-01-basic-usage">基础使用</a>一文中介绍了树莓派及其系统安装使用。本文介绍树莓派中软件包管理器的设置以及基础应用软件包的安装设置。</p>
+<h2 id="1-软件包管理器及软件源设置"><a href="#1-软件包管理器及软件源设置" class="headerlink" title="1 软件包管理器及软件源设置"></a>1 软件包管理器及软件源设置</h2><p>树莓派是基于<strong>Debian</strong>的系统，包管理器也是<code>apt-get</code>。关于<code>apt-get</code>的介绍、在软件安装中的作用以及与<code>dkpg</code>的关系请看<a href="https://wiki.debian.org/Apt" target="_blank" rel="noopener">Wiki</a>。<code>apt-get</code>工具主要是处理软件包的各种依赖关系并获取软件安装过程需要的各种安装包，<code>dkpg</code>负责实际的软件安装工作。</p>
+<a id="more"></a>
+<h3 id="1-1-使用包管理器安装应用软件"><a href="#1-1-使用包管理器安装应用软件" class="headerlink" title="1.1 使用包管理器安装应用软件"></a>1.1 使用包管理器安装应用软件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装软件</span></span><br><span class="line">sudo apt-get install xxx</span><br><span class="line"><span class="comment"># 卸载软件</span></span><br><span class="line">sudo apt-get remove xxx</span><br><span class="line"><span class="comment"># 清除无用软件包</span></span><br><span class="line">sudo apt-get autoremove</span><br><span class="line"><span class="comment"># 更新软件源的软件包信息，在配置新的软件源后运行</span></span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-配置软件源"><a href="#1-2-配置软件源" class="headerlink" title="1.2 配置软件源"></a>1.2 配置软件源</h3><p><code>sources.list</code>里设置了各种不同软件源的地址，<code>apt-get</code>在软件源列表中搜索我们想要安装的软件。</p>
+<p>配置软件源地址的方法有两种：一是直接在<code>/etc/apt/sources.list</code>文件中添加软件源地址；二是将软件源地址单独写入一个后缀为list的文件，并将文件放置于<code>/etc/apt/sources.list.d</code>。具体配置方法参考<code>man sources.list</code>所示的文档。</p>
+<h3 id="1-3-使用镜像地址"><a href="#1-3-使用镜像地址" class="headerlink" title="1.3 使用镜像地址"></a>1.3 使用镜像地址</h3><p>树莓派的官方软件源位于国外，通过使用国内的镜像软件源，我们可以加快下载软件包的速度。国内的镜像源推荐<a href="http://mirrors.aliyun.com/help/raspbian" target="_blank" rel="noopener">阿里</a>和<a href="https://lug.ustc.edu.cn/wiki/mirrors/help/raspbian" target="_blank" rel="noopener">中科大</a>，公网建议阿里镜像源地址放在<code>/etc/apt/sources.list</code>文件最前面，教育网则优先使用中科大。</p>
+<blockquote>
+<p>官方软件源<a href="http://www.raspbian.org/RaspbianMirrors" target="_blank" rel="noopener">列表</a></p>
+</blockquote>
+<h3 id="1-4-加速软件包下载"><a href="#1-4-加速软件包下载" class="headerlink" title="1.4 加速软件包下载"></a>1.4 加速软件包下载</h3><p><code>apt-get</code>工具<code>wget</code>来下载软件包，类似于<code>IE浏览器</code>自带的下载功能，没有使用加速手段。我们可以通过使用<a href="https://github.com/tatsuhiro-t/apt-metalink" target="_blank" rel="noopener"><strong>apt-metalink</strong></a>工具来加速软件包的下载，它基于<code>aria2</code>，能够从多个软件源处下载软件包，最大化地利用网络带宽来下载软件包。</p>
+<p>安装<code>apt-metalink</code>工具</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install aria2</span><br><span class="line">sudo apt-get install python-apt</span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/bin</span><br><span class="line">sudo wget https://raw.githubusercontent.com/tatsuhiro-t/apt-metalink/master/apt-metalink</span><br><span class="line">sudo chmod a+x apt-metalink</span><br></pre></td></tr></table></figure>
+<p>使用<code>apt-metlink</code></p>
+<blockquote>
+<p>Usage: sudo apt-metalink [options] {upgrade | dist-upgrade | install pkg …}</p>
+<p>Options:<br>  -h, –help            show this help message and exit<br>  -d, –download-only   Download only. [default: False]<br>  –print-metalink      Instead of fetching the files, Metalink XML document is printed. Metalink XML document contains package’s URIs and checksums.<br>  –hash-check          Check hash of already downloaded files. If hash check fails, download file again.<br>  -x ARIA2C, –aria2c=ARIA2C path to aria2c executable [default: /usr/bin/aria2c]</p>
+</blockquote>
+<h2 id="2-应用设置"><a href="#2-应用设置" class="headerlink" title="2 应用设置"></a>2 应用设置</h2><h3 id="2-1-IP设置"><a href="#2-1-IP设置" class="headerlink" title="2.1 IP设置"></a>2.1 IP设置</h3><p>给树莓派设置一个静态IP地址，会方便以后通过IP地址访问树莓派。具体设置方法如下：</p>
+<p>修改<code>/etc/network/interfaces</code>中<code>eth0</code>部分为：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">auto eth0</span><br><span class="line">allow-hotplug eth0</span><br><span class="line">iface eth0 inet static</span><br><span class="line">address 192.168.10.123</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">gateway 192.168.10.1</span><br></pre></td></tr></table></figure>
+<p>重启网络服务<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service networking restart</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<ol>
+<li>上面方法是针对有线连接的情况，如果树莓派是通过无线连接到路由器的话，请修改<code>wlan0</code>部分。</li>
+<li>路由器的DHCP服务设置里面可以根据MAC地址来绑定IP地址，但是这种方法要等到DHCP服务给树莓派分配IP后，树莓派才会有一个有效的IP地址。使用上面的方法，树莓派在启动后就会有一个有效的IP地址。</li>
+</ol>
+</blockquote>
+<h3 id="2-2-远程访问"><a href="#2-2-远程访问" class="headerlink" title="2.2 远程访问"></a>2.2 远程访问</h3><p>如果你的运营商给你分配了一个公网IP地址，那么你可以通过<a href="https://en.wikipedia.org/wiki/Dynamic_DNS" target="_blank" rel="noopener">DDNS技术</a>来访问你的树莓派。现在的路由器一般都带花生壳DDNS配置功能，你需要申请一个花生壳账号和配置好树莓派的端口映射，这样你就可以在任意其他地方访问到你的树莓派。</p>
+<p>如果你使用的是一个大局域网的运营商服务(我用的电信就是。。。)，那么你可以通过花生壳内网版来访问树莓派。</p>
+<p><strong>花生壳内网版安装</strong></p>
+<ol>
+<li>下载<a href="/2016/01/05/fun-in-raspberrypi-02-application-config/phddns_raspberry.tgz" title="phddns_raspberry.tgz">phddns_raspberry.tgz</a></li>
+<li>解压<code>tar zxvf phddns_raspberry.tgz</code></li>
+<li>进入<code>phddns2</code>目录，执行<code>sudo ./oraynewph start</code>，提示<code>Oraynewph start success</code>表示成功安装执行</li>
+</ol>
+<p><strong>使用帮助</strong><br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line">sudo oraynewph status</span><br><span class="line"><span class="comment"># 停止花生壳服务</span></span><br><span class="line">sudo oraynewph stop</span><br><span class="line"><span class="comment"># 启动花生壳服务</span></span><br><span class="line">sudo oraynewph start</span><br></pre></td></tr></table></figure></p>
+<p>在设置好花生壳内网版服务后，登录<code>b.oray.com</code>网站，添加一个映射对应树莓派的SSH服务后，我们会得到一个域名和端口用于远程SSH登录树莓派。</p>
+<p><strong><a href="/2016/01/05/fun-in-raspberrypi-02-application-config/raspberrypi_oray_service.pdf" title="图文版教程请看这里">图文版教程请看这里</a></strong></p>
+<p>我使用的是花生壳内网没费版(交了8元的什么测试费吧)，确实如它官方所说很不稳定，经常出现<code>ssh connection closed by foreign host</code>，有时删除旧的映射重新添加下又好了。不过也无所谓，也就是偶尔<code>SSH</code>登陆下。</p>
+<blockquote>
+<p>技术上说，花生壳内网版就是在你的树莓派上运行着一个进程，它会与花生壳的外网机器（固定IP）进行连接。花生壳的外网机器作为你与树莓派通信的中间人，会将你发给它的数据中转给树莓派。所以你如果有一台外网机器就可以自己进行中转。</p>
+</blockquote>
+<p><strong>更新：受不了花生壳内网免费版的不稳定，打电话要电信要求换公网IP地址，公网IP树莓派访问参考<a href="/2016/01/14/fun-in-raspberrypi-03-remote-access">这里</a></strong></p>
+<h3 id="2-3-PIP使用设置"><a href="#2-3-PIP使用设置" class="headerlink" title="2.3 PIP使用设置"></a>2.3 PIP使用设置</h3><p><strong>PIP</strong>是Python的包管理工具，为我们安装Python第三方扩展包提供了方便。</p>
+<p><strong>使用</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># latest version</span></span><br><span class="line">sudo pip install SomePackage   </span><br><span class="line"><span class="comment"># specific version</span></span><br><span class="line">sudo pip install SomePackage==1.0.4    </span><br><span class="line"> <span class="comment"># minimum version</span></span><br><span class="line">sudo pip install <span class="string">'SomePackage&gt;=1.0.4'</span></span><br><span class="line"><span class="comment"># specified base of python package index</span></span><br><span class="line">sudo pip install SomePackage -i &lt;url&gt;</span><br><span class="line"><span class="comment"># uninstall package</span></span><br><span class="line">pip uninstall SomePackage</span><br><span class="line"><span class="comment"># search package</span></span><br><span class="line">pip search <span class="string">"query"</span></span><br></pre></td></tr></table></figure>
+<p><strong>配置</strong></p>
+<p><strong>PIP</strong>的用户配置文件位于<code>$HOME/.config/pip/pip.conf</code>，全局配置文件位于<code>/etc/pip.conf</code>。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[global]</span><br><span class="line">timeout = 60</span><br><span class="line">index-url = http://mirrors.aliyun.com/pypi/simple/</span><br></pre></td></tr></table></figure>
+<p><code>index-url</code>配置Python包索引地址，推荐配置为国内的镜像源，加快包下载速度。国内速度快的有<a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">阿里</a>和<a href="https://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">中科大</a></p>
+<blockquote>
+<p><a href="https://pip.pypa.io/en/stable/" target="_blank" rel="noopener">PIP官方文档</a></p>
+</blockquote>
+<h3 id="2-4-FTP服务器"><a href="#2-4-FTP服务器" class="headerlink" title="2.4 FTP服务器"></a>2.4 FTP服务器</h3><p>给树莓派安装FTP服务器，方便平时上传/下载文件。</p>
+<p><strong>安装使用</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo apt-get install vsftpd</span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">sudo service vsftpd start</span><br><span class="line"><span class="comment"># 重启</span></span><br><span class="line">sudo service vsftpd restart</span><br></pre></td></tr></table></figure>
+<p><strong>配置</strong></p>
+<p>修改<code>/etc/vsftpd.conf</code>配置文件如下。配置完成后需要重启vsftpd服务。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 不允许匿名</span></span><br><span class="line">anonymous_enable=NO</span><br><span class="line"><span class="comment"># 本地用户访问</span></span><br><span class="line">local_enable=YES</span><br><span class="line"><span class="comment"># 可以进行写操作</span></span><br><span class="line">write_enable=YES</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果没有设置<code>write_enable=YES</code>，那么上传文件时会遇到550错误(550 Permission denied)。</p>
+</blockquote>
+<h3 id="2-5-Nginx安装"><a href="#2-5-Nginx安装" class="headerlink" title="2.5 Nginx安装"></a>2.5 Nginx安装</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo apt-get install nginx</span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">sudo /etc/init.d/nginx start</span><br></pre></td></tr></table></figure>
+<ul>
+<li>默认站点位置<code>/usr/share/nginx/html</code></li>
+<li>配置站点配置文件<code>/etc/nginx/sites-available/default</code></li>
+</ul>
+<h3 id="2-6-Glances安装"><a href="#2-6-Glances安装" class="headerlink" title="2.6 Glances安装"></a>2.6 Glances安装</h3><p><a href="https://github.com/nicolargo/glances" target="_blank" rel="noopener">Glances</a>是一个跨平台的系统性能监视工具，能够方便地在一个页面上查看CPU、内存、磁盘等使用数据和当前运行进程状态。</p>
+<p><strong>安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install lm-sensors</span><br><span class="line">sudo pip install glances</span><br></pre></td></tr></table></figure>
+<h3 id="2-7-存储设备使用"><a href="#2-7-存储设备使用" class="headerlink" title="2.7 存储设备使用"></a>2.7 存储设备使用</h3><p>当我们将U盘、移动硬盘或者外接硬盘通过USB连接到树莓派后，我们需要进行挂在操作后才能正常使用这些存储设备。</p>
+<h4 id="挂载使用"><a href="#挂载使用" class="headerlink" title="挂载使用"></a>挂载使用</h4><p>1. 查看连接到USB接口上的存储设备，确认设备已经被识别。<code>Device</code>信息中的<code>/dev/sda</code>表示U盘、硬盘等设备，<code>/dev/mmc</code>表示TF、SD卡类。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo fdisk -l</span><br></pre></td></tr></table></figure></p>
+<p>2. 当设备被正确识别后，就可以进行挂载。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 新建挂载目录</span></span><br><span class="line">sudo mkdir /mnt/usb_flash</span><br><span class="line"><span class="comment"># 挂载设备</span></span><br><span class="line">sudo mount -o uid=pi,gid=pi /dev/sda1 /mnt/usb_flash/</span><br><span class="line"><span class="comment"># 查看挂载是否成功</span></span><br><span class="line">df -h</span><br></pre></td></tr></table></figure></p>
+<p>3. 当设备读写完毕后，取消挂载后就可以拔出设备<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo umount /mnt/usb_flash</span><br></pre></td></tr></table></figure></p>
+<p>4. 提示设备忙，查找占用进程，kill之后重新取消挂载。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># umount: /mnt/usb: device is busy</span></span><br><span class="line"><span class="comment"># 查找关联进程</span></span><br><span class="line">sudo lsof /mnt/usb</span><br><span class="line"><span class="comment"># 杀掉相关进程</span></span><br><span class="line">sudo <span class="built_in">kill</span> xxx</span><br></pre></td></tr></table></figure></p>
+<p>5. 自动挂载。每次手动挂载存储设备比较麻烦。我们可以在<code>/etc/fstab</code>文件中添加需要自动挂载的设备。</p>
+<p>首先我们查看我们需要挂载设备的标识符。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo blkid</span><br></pre></td></tr></table></figure></p>
+<p>有了标识符后，我们在<code>/etc/fstab</code>中添加新的条目。详细条目设置参考<code>man fstab</code>。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设备标识符 挂载点 文件系统格式 挂载选项 dump命令使用 fsck命令使用</span></span><br><span class="line">UUID=<span class="string">"xxx"</span> /mnt/sync ext4 defaults 0 0</span><br></pre></td></tr></table></figure></p>
+<p>添加了新的条目后，在设备插入系统后就会自动挂载。如果已经插入系统上，可以使用<code>sudo mount 设备标识符</code>进行挂载。</p>
+<h4 id="分区格式化"><a href="#分区格式化" class="headerlink" title="分区格式化"></a>分区格式化</h4><p>1. 硬盘分区。大于2TB的硬盘需要使用GPT分区表。GPT分区表是现在标准的分区格式，兼容MBR分区表格式，因此建议都使用GPT分区表。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fdisk /dev/sda</span><br></pre></td></tr></table></figure></p>
+<p>2. 格式化分区。参数<code>-m</code>设置文件系统保留空间。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 格式化ext4格式</span></span><br><span class="line">mkfs.ext4 -m 1 /dev/sda1</span><br><span class="line"><span class="comment"># 调整保留空间大小</span></span><br><span class="line">tune2fs -m 1 /dev/sda1</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/01/03/fun-in-raspberrypi-01-basic-usage/" rel="bookmark">树莓派折腾记：基础使用</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/01/14/fun-in-raspberrypi-03-remote-access/" rel="bookmark">树莓派折腾记：远程访问</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/01/19/fun-in-raspberrypi-04-cloud-storage-on-pydio-installation/" rel="bookmark">树莓派折腾记：家庭私有云存储</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/03/22/gitlab-install-configure/" rel="bookmark">Gitlab安装配置及使用</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2016/03/08/raspberrypi-debian-startup-script-config/" rel="bookmark">Debian(树莓派)开机启动脚本设置</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+            <a href="/tags/树莓派/" rel="tag"># 树莓派</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/03/fun-in-raspberrypi-01-basic-usage/" rel="next" title="树莓派折腾记：基础使用">
+                <i class="fa fa-chevron-left"></i> 树莓派折腾记：基础使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/14/fun-in-raspberrypi-03-remote-access/" rel="prev" title="树莓派折腾记：远程访问">
+                树莓派折腾记：远程访问 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Author</p>
+              <p class="site-description motion-element" itemprop="description">希望能够每天提升一点~~~</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/pzxbc" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:pzxbc@qq.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-nd.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-软件包管理器及软件源设置"><span class="nav-number">1.</span> <span class="nav-text">1 软件包管理器及软件源设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-使用包管理器安装应用软件"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 使用包管理器安装应用软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-配置软件源"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 配置软件源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-使用镜像地址"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 使用镜像地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-加速软件包下载"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 加速软件包下载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-应用设置"><span class="nav-number">2.</span> <span class="nav-text">2 应用设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-IP设置"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 IP设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-远程访问"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 远程访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-PIP使用设置"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 PIP使用设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-FTP服务器"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 FTP服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-Nginx安装"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 Nginx安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-Glances安装"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 Glances安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-存储设备使用"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 存储设备使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#挂载使用"><span class="nav-number">2.7.1.</span> <span class="nav-text">挂载使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分区格式化"><span class="nav-number">2.7.2.</span> <span class="nav-text">分区格式化</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Author</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">86k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:23</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'EzRRCR6TWWbI6tznEWKbd5MH-gzGzoHsz',
+        appKey: 'rWMYX8Xg9HiykSb6BrfvF0fD',
+        placeholder: 'Just go go',
+        avatar:'wavatar',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: true
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

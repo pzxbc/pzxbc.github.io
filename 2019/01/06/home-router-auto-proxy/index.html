@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="AEwKHvOWNqrIhtqouotdW_pHO0lGcAIUc_Dzfo4T894">
+
+
+
+  <meta name="msvalidate.01" content="6F83C300A4B93AB7A45420F532B43FFE">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Google Cloud赠送的$300到期了，之前发现连不上AppleStore还以为是网络问题，隔天才发现是Google Cloud到期导致的。没有了免费的服务器资源，就得去找一个了。通过对比，发现Vultr提供的VPS服务性价比比较高。每个月$3.5，提供1个CPU、512M内存、500GB/月流量。对于个人日常翻墙访问国外服务绰绰有余了。也有一个月$2.5的，但是只有IPv6地址，如果你是在">
+<meta name="keywords" content="VPS,Vultr,EdgeOS,V2ray,Proxy,iptables,ipset,dnsmasq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="家庭网络自动代理解决方案">
+<meta property="og:url" content="http://blog.pzxbc.com/2019/01/06/home-router-auto-proxy/index.html">
+<meta property="og:site_name" content="PZXBC&#39;s blog">
+<meta property="og:description" content="Google Cloud赠送的$300到期了，之前发现连不上AppleStore还以为是网络问题，隔天才发现是Google Cloud到期导致的。没有了免费的服务器资源，就得去找一个了。通过对比，发现Vultr提供的VPS服务性价比比较高。每个月$3.5，提供1个CPU、512M内存、500GB/月流量。对于个人日常翻墙访问国外服务绰绰有余了。也有一个月$2.5的，但是只有IPv6地址，如果你是在">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-06T14:25:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="家庭网络自动代理解决方案">
+<meta name="twitter:description" content="Google Cloud赠送的$300到期了，之前发现连不上AppleStore还以为是网络问题，隔天才发现是Google Cloud到期导致的。没有了免费的服务器资源，就得去找一个了。通过对比，发现Vultr提供的VPS服务性价比比较高。每个月$3.5，提供1个CPU、512M内存、500GB/月流量。对于个人日常翻墙访问国外服务绰绰有余了。也有一个月$2.5的，但是只有IPv6地址，如果你是在">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="PZXBC's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://blog.pzxbc.com/2019/01/06/home-router-auto-proxy/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>家庭网络自动代理解决方案 | PZXBC's blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-19482318-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-19482318-2');
+</script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PZXBC's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">学以致用</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">60</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">12</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">44</span></a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.pzxbc.com/2019/01/06/home-router-auto-proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="希望能够每天提升一点~~~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PZXBC's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">家庭网络自动代理解决方案
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-06 22:25:15" itemprop="dateCreated datePublished" datetime="2019-01-06T22:25:15+08:00">2019-01-06</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/随手记/" itemprop="url" rel="index"><span itemprop="name">随手记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/06/home-router-auto-proxy/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/01/06/home-router-auto-proxy/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/01/06/home-router-auto-proxy/" class="leancloud_visitors" data-flag-title="家庭网络自动代理解决方案">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">13k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">22 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>Google Cloud</code>赠送的$300到期了，之前发现连不上<code>AppleStore</code>还以为是网络问题，隔天才发现是<code>Google Cloud</code>到期导致的。没有了免费的服务器资源，就得去找一个了。通过对比，发现<code>Vultr</code>提供的<code>VPS</code>服务性价比比较高。每个月$3.5，提供1个CPU、512M内存、500GB/月流量。对于个人日常翻墙访问国外服务绰绰有余了。也有一个月$2.5的，但是只有IPv6地址，如果你是在学校这种有IPv6环境的地方，使用这个套餐相对会省一点。这个是我的邀请链接<a href="https://www.vultr.com/?ref=7748749" target="_blank" rel="noopener">https://www.vultr.com/?ref=7748749</a>，如果这篇文章对你有用，希望您能使用我的邀请链接~</p>
+<a id="more"></a>
+<p>服务器建议选择东京或者新加坡的，这样延迟会小一点。测试了下东京延迟150ms左右，新加坡延迟250ms左右。新建好的服务器也不一定能够访问，可能给你分配的IP地址已经被<code>GFW</code>封了。可以通过端口检测工具来判断IP地址是否已经被封。在<a href="http://tool.chinaz.com/port/" target="_blank" rel="noopener">国内端口测试网站</a>和<a href="https://www.yougetsignal.com/tools/open-ports/" target="_blank" rel="noopener">国外端口测试网站</a>分别测试服务器IP对应的22端口是否可以访问，如果国外可以访问国内不行，那么这个分配的IP地址已经被封了。可以更换服务器的物理地址或者隔天再重新创建服务器来获取新的IP地址。(立刻销毁，在同一物理地址上重新创建还是会分配原来的IP地址)</p>
+<p>上面说这么多，差不多都是在为<code>Vultr</code>服务商打广告了。之所以会有这篇文章是因为我在重新搭建自动代理的时候发现需配置的地方还挺多的，还是记录下来，不然以后自己都可能需要重新去查怎么布置。</p>
+<h2 id="自动代理解决方案框架图"><a href="#自动代理解决方案框架图" class="headerlink" title="自动代理解决方案框架图"></a>自动代理解决方案框架图</h2><h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>服务器上所需要的配置相对来说比较少，只需要安装配置<code>V2ray</code>软件即可。</p>
+<p><a href="https://www.v2ray.com/" target="_blank" rel="noopener"><code>V2RAY</code></a>是一个支持多协议的网络请求转发软件，它可以将一个机器上的网络请求转发到远程服务器上，然后将远程服务器返回的结果转发回请求的机器。</p>
+<h3 id="安装V2ray"><a href="#安装V2ray" class="headerlink" title="安装V2ray"></a>安装V2ray</h3><p>我的服务器系统是<code>Debian</code>的(Ubuntu应该也适用)，其他系统参考官方文档吧。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo su</span><br><span class="line">bash &lt;(curl -L -s https://install.direct/go.sh)</span><br></pre></td></tr></table></figure>
+<h3 id="配置V2ray"><a href="#配置V2ray" class="headerlink" title="配置V2ray"></a>配置V2ray</h3><p><code>V2ray</code>的配置文件是位于<code>/etc/v2ray</code>目录下的<code>config.json</code></p>
+<p>下面的配置支持<code>vmess</code>的<code>tcp</code>和<code>kcp</code>的传入链接。如果你的VPS服务器延迟比较严重，建议使用<code>kcp</code>协议，有加速的效果。这个网站<a href="https://www.uuidgenerator.net/" target="_blank" rel="noopener">https://www.uuidgenerator.net/</a>可以在线生成<code>id</code>。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"log"</span> : &#123;</span><br><span class="line">    <span class="attr">"access"</span>: <span class="string">"/var/log/v2ray/access.log"</span>,</span><br><span class="line">    <span class="attr">"error"</span>: <span class="string">"/var/log/v2ray/error.log"</span>,</span><br><span class="line">    <span class="attr">"loglevel"</span>: <span class="string">"warn"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"inbound"</span>: &#123;</span><br><span class="line">    <span class="attr">"port"</span>: <span class="number">43608</span>,</span><br><span class="line">    <span class="attr">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">    <span class="attr">"settings"</span>: &#123;</span><br><span class="line">      <span class="attr">"clients"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"id"</span>: <span class="string">"a715b4f3-4b4a-4cbf-8a3e-8ab1a537da2f"</span>,</span><br><span class="line">          <span class="attr">"level"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"alterId"</span>: <span class="number">64</span>,</span><br><span class="line">          <span class="attr">"email"</span>: <span class="string">"yourmail@qq.com"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"detour"</span>: &#123;</span><br><span class="line">    <span class="attr">"to"</span>: <span class="string">"detour-kcp"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="attr">"network"</span>: <span class="string">"kcp"</span>,</span><br><span class="line">        <span class="attr">"kcpSettings"</span>: &#123;</span><br><span class="line">          <span class="attr">"mtu"</span>: <span class="number">1350</span>,</span><br><span class="line">          <span class="attr">"tti"</span>: <span class="number">20</span>,</span><br><span class="line">          <span class="attr">"uplinkCapacity"</span>: <span class="number">100</span>,</span><br><span class="line">          <span class="attr">"downlinkCapacity"</span>: <span class="number">100</span>,</span><br><span class="line">          <span class="attr">"congestion"</span>: <span class="literal">false</span>,</span><br><span class="line">          <span class="attr">"readBufferSize"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"writeBufferSize"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"header"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"wechat-video"</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"inboundDetour"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="attr">"port"</span>: <span class="number">43609</span>,</span><br><span class="line">      <span class="attr">"tag"</span>: <span class="string">"inbound-tcp"</span>,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">"id"</span>: <span class="string">"a715b4f3-4b4a-4cbf-8a3e-8ab1a537da2f"</span>,</span><br><span class="line">            <span class="attr">"level"</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="attr">"alterId"</span>: <span class="number">64</span>,</span><br><span class="line">            <span class="attr">"email"</span>: <span class="string">"yourmail@qq.com"</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="attr">"network"</span>: <span class="string">"tcp"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="attr">"port"</span>: <span class="string">"51001-54000"</span>,</span><br><span class="line">      <span class="attr">"tag"</span>: <span class="string">"detour-kcp"</span>,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"default"</span>: &#123;</span><br><span class="line">          <span class="attr">"level"</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">"alterId"</span>: <span class="number">64</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"allocate"</span>: &#123;</span><br><span class="line">        <span class="attr">"strategy"</span>: <span class="string">"random"</span>,</span><br><span class="line">        <span class="attr">"concurrency"</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">"refresh"</span>: <span class="number">5</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="attr">"network"</span>: <span class="string">"kcp"</span>,</span><br><span class="line">        <span class="attr">"kcpSettings"</span>: &#123;</span><br><span class="line">          <span class="attr">"mtu"</span>: <span class="number">1350</span>,</span><br><span class="line">          <span class="attr">"tti"</span>: <span class="number">20</span>,</span><br><span class="line">          <span class="attr">"uplinkCapacity"</span>: <span class="number">100</span>,</span><br><span class="line">          <span class="attr">"downlinkCapacity"</span>: <span class="number">100</span>,</span><br><span class="line">          <span class="attr">"congestion"</span>: <span class="literal">false</span>,</span><br><span class="line">          <span class="attr">"readBufferSize"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"writeBufferSize"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"header"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"wechat-video"</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"outbound"</span>: &#123;</span><br><span class="line">    <span class="attr">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">    <span class="attr">"settings"</span>: &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"outboundDetour"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;&#125;,</span><br><span class="line">      <span class="attr">"tag"</span>: <span class="string">"blocked"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"routing"</span>: &#123;</span><br><span class="line">    <span class="attr">"strategy"</span>: <span class="string">"rules"</span>,</span><br><span class="line">    <span class="attr">"settings"</span>: &#123;</span><br><span class="line">      <span class="attr">"rules"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">          <span class="attr">"ip"</span>: [</span><br><span class="line">            <span class="string">"0.0.0.0/8"</span>,</span><br><span class="line">            <span class="string">"10.0.0.0/8"</span>,</span><br><span class="line">            <span class="string">"100.64.0.0/10"</span>,</span><br><span class="line">            <span class="string">"127.0.0.0/8"</span>,</span><br><span class="line">            <span class="string">"169.254.0.0/16"</span>,</span><br><span class="line">            <span class="string">"172.16.0.0/12"</span>,</span><br><span class="line">            <span class="string">"192.0.0.0/24"</span>,</span><br><span class="line">            <span class="string">"192.0.2.0/24"</span>,</span><br><span class="line">            <span class="string">"192.168.0.0/16"</span>,</span><br><span class="line">            <span class="string">"198.18.0.0/15"</span>,</span><br><span class="line">            <span class="string">"198.51.100.0/24"</span>,</span><br><span class="line">            <span class="string">"203.0.113.0/24"</span>,</span><br><span class="line">            <span class="string">"::1/128"</span>,</span><br><span class="line">            <span class="string">"fc00::/7"</span>,</span><br><span class="line">            <span class="string">"fe80::/10"</span></span><br><span class="line">          ],</span><br><span class="line">          <span class="attr">"outboundTag"</span>: <span class="string">"blocked"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"transport"</span>: &#123;</span><br><span class="line">    <span class="attr">"kcpSettings"</span>: &#123;</span><br><span class="line">      <span class="attr">"uplinkCapacity"</span>: <span class="number">100</span>,</span><br><span class="line">      <span class="attr">"downlinkCapacity"</span>: <span class="number">100</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="V2ray服务启动"><a href="#V2ray服务启动" class="headerlink" title="V2ray服务启动"></a>V2ray服务启动</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart v2ray.service</span><br><span class="line"><span class="comment"># 查看v2ray服务状态</span></span><br><span class="line">sudo systemctl status v2ray.service</span><br></pre></td></tr></table></figure>
+<h2 id="路由器配置"><a href="#路由器配置" class="headerlink" title="路由器配置"></a>路由器配置</h2><p>家里路由器是<code>EdgeRouter PoE 5</code>，系统是基于<code>debian</code>的<code>edgeos</code>。推荐下这个路由器，公司专注于做企业级的产品，产品非常稳定。当然这种路由器只适合爱折腾的人士，需要有相应的知识才能配置使用。</p>
+<h3 id="V2ray安装"><a href="#V2ray安装" class="headerlink" title="V2ray安装"></a>V2ray安装</h3><p><code>ssh</code>登录路由器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换root用户，默认ssh登录账号为ubnt</span></span><br><span class="line">sudo su</span><br><span class="line">bash &lt;(curl -L -s https://install.direct/go.sh)</span><br></pre></td></tr></table></figure>
+<p>这个路由器架构是<code>mips64</code>，也可以手动下载<code>v2ray</code>安装包<a href="https://github.com/v2ray/v2ray-core/releases" target="_blank" rel="noopener">v2ray-linux-mips64</a></p>
+<p>然后使用<code>go.sh</code>脚本安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./go.sh -l v2ray-linux-mips64.zip</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>uname -a</code> 查看系统架构</p>
+</blockquote>
+<h3 id="V2ray配置"><a href="#V2ray配置" class="headerlink" title="V2ray配置"></a>V2ray配置</h3><p>路由器上的<code>V2ray</code>配置为中转服务器。</p>
+<p>下面配置支持一下功能</p>
+<ol>
+<li><code>socks</code>、<code>http</code>代理以及基于端口映射的透明代理</li>
+<li><code>DNS</code>代理转发</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"log"</span>: &#123;</span><br><span class="line">    <span class="attr">"access"</span>: <span class="string">"/var/log/v2ray/access.log"</span>,</span><br><span class="line">    <span class="attr">"error"</span>: <span class="string">"/var/log/v2ray/error.log"</span>,</span><br><span class="line">    <span class="attr">"loglevel"</span>: <span class="string">"warn"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"routing"</span>: &#123;</span><br><span class="line">    <span class="attr">"strategy"</span>: <span class="string">"rules"</span>,</span><br><span class="line">    <span class="attr">"settings"</span>: &#123;</span><br><span class="line">      <span class="attr">"rules"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">          <span class="attr">"inboundTag"</span>: [</span><br><span class="line">            <span class="string">"tag-inbound-tcp"</span></span><br><span class="line">          ],</span><br><span class="line">          <span class="attr">"outboundTag"</span>: <span class="string">"tag-outbound-tcp"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">          <span class="attr">"inboundTag"</span>: [</span><br><span class="line">            <span class="string">"dns-inbound"</span></span><br><span class="line">          ],</span><br><span class="line">          <span class="attr">"outboundTag"</span>: <span class="string">"tag-outbound-tcp"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"inbound"</span>: &#123;</span><br><span class="line">    <span class="attr">"port"</span>: <span class="number">43608</span>,</span><br><span class="line">    <span class="attr">"listen"</span>: <span class="string">"192.168.10.1"</span>,</span><br><span class="line">    <span class="attr">"protocol"</span>: <span class="string">"socks"</span>,</span><br><span class="line">    <span class="attr">"settings"</span>: &#123;</span><br><span class="line">      <span class="attr">"auth"</span>: <span class="string">"noauth"</span>,</span><br><span class="line">      <span class="attr">"udp"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"ip"</span>: <span class="string">"127.0.0.1"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"inboundDetour"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="attr">"port"</span>: <span class="number">43830</span>,</span><br><span class="line">          <span class="attr">"protocol"</span>: <span class="string">"dokodemo-door"</span>,</span><br><span class="line">          <span class="attr">"settings"</span>: &#123;</span><br><span class="line">              <span class="attr">"address"</span>: <span class="string">"vps_ip_address"</span>,</span><br><span class="line">              <span class="attr">"port"</span>: <span class="number">443</span>,</span><br><span class="line">              <span class="attr">"network"</span>: <span class="string">"tcp,udp"</span>,</span><br><span class="line">              <span class="attr">"timeout"</span>: <span class="number">0</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="attr">"protocol"</span>: <span class="string">"http"</span>,</span><br><span class="line">          <span class="attr">"port"</span>: <span class="number">43607</span>,</span><br><span class="line">          <span class="attr">"tag"</span>: <span class="string">"http-proxy"</span>,</span><br><span class="line">          <span class="attr">"listen"</span>: <span class="string">"0.0.0.0"</span>,</span><br><span class="line">          <span class="attr">"settings"</span>: &#123;&#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="attr">"port"</span>: <span class="number">43606</span>,</span><br><span class="line">          <span class="attr">"protocol"</span>: <span class="string">"dokodemo-door"</span>,</span><br><span class="line">          <span class="attr">"tag"</span>: <span class="string">"dns-inbound"</span>,</span><br><span class="line">          <span class="attr">"settings"</span>: &#123;</span><br><span class="line">              <span class="attr">"address"</span>: <span class="string">"8.8.8.8"</span>,</span><br><span class="line">              <span class="attr">"port"</span>: <span class="number">53</span>,</span><br><span class="line">              <span class="attr">"network"</span>: <span class="string">"tcp,udp"</span>,</span><br><span class="line">              <span class="attr">"timeout"</span>: <span class="number">0</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="attr">"port"</span>: <span class="number">43605</span>,</span><br><span class="line">          <span class="attr">"protocol"</span>: <span class="string">"dokodemo-door"</span>,</span><br><span class="line">          <span class="attr">"settings"</span>: &#123;</span><br><span class="line">              <span class="attr">"network"</span>: <span class="string">"tcp,udp"</span>,</span><br><span class="line">              <span class="attr">"timeout"</span>: <span class="number">0</span>,</span><br><span class="line">              <span class="attr">"followRedirect"</span>: <span class="literal">true</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="attr">"port"</span>: <span class="number">43604</span>,</span><br><span class="line">          <span class="attr">"protocol"</span>: <span class="string">"dokodemo-door"</span>,</span><br><span class="line">          <span class="attr">"tag"</span>: <span class="string">"tag-inbound-tcp"</span>,</span><br><span class="line">          <span class="attr">"settings"</span>: &#123;</span><br><span class="line">              <span class="attr">"network"</span>: <span class="string">"tcp,udp"</span>,</span><br><span class="line">              <span class="attr">"timeout"</span>: <span class="number">0</span>,</span><br><span class="line">              <span class="attr">"followRedirect"</span>: <span class="literal">true</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"outbound"</span>: &#123;</span><br><span class="line">    <span class="attr">"sendThrough"</span>: <span class="string">"192.168.10.1"</span>,</span><br><span class="line">    <span class="attr">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">    <span class="attr">"settings"</span>: &#123;</span><br><span class="line">      <span class="attr">"vnext"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"address"</span>: <span class="string">"服务器IP地址"</span>,</span><br><span class="line">          <span class="attr">"port"</span>: <span class="number">43608</span>,</span><br><span class="line">          <span class="attr">"users"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">"id"</span>: <span class="string">"a715b4f3-4b4a-4cbf-8a3e-8ab1a537da2f"</span>,</span><br><span class="line">              <span class="attr">"alterId"</span>: <span class="number">64</span>,</span><br><span class="line">              <span class="attr">"security"</span>: <span class="string">"auto"</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="attr">"network"</span>: <span class="string">"kcp"</span>,</span><br><span class="line">        <span class="attr">"kcpSettings"</span>: &#123;</span><br><span class="line">          <span class="attr">"mtu"</span>: <span class="number">1350</span>,</span><br><span class="line">          <span class="attr">"tti"</span>: <span class="number">20</span>,</span><br><span class="line">          <span class="attr">"uplinkCapacity"</span>: <span class="number">5</span>,</span><br><span class="line">          <span class="attr">"downlinkCapacity"</span>: <span class="number">100</span>,</span><br><span class="line">          <span class="attr">"congestion"</span>: <span class="literal">false</span>,</span><br><span class="line">          <span class="attr">"readBufferSize"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"writeBufferSize"</span>: <span class="number">2</span>,</span><br><span class="line">          <span class="attr">"header"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"wechat-video"</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"outboundDetour"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="attr">"sendThrough"</span>: <span class="string">"192.168.10.1"</span>,</span><br><span class="line">      <span class="attr">"tag"</span>: <span class="string">"tag-outbound-tcp"</span>,</span><br><span class="line">      <span class="attr">"settings"</span>: &#123;</span><br><span class="line">        <span class="attr">"vnext"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">"address"</span>: <span class="string">"服务器IP地址"</span>,</span><br><span class="line">            <span class="attr">"port"</span>: <span class="number">43609</span>,</span><br><span class="line">            <span class="attr">"users"</span>: [</span><br><span class="line">              &#123;</span><br><span class="line">                <span class="attr">"id"</span>: <span class="string">"a715b4f3-4b4a-4cbf-8a3e-8ab1a537da2f"</span>,</span><br><span class="line">                <span class="attr">"alterId"</span>: <span class="number">64</span>,</span><br><span class="line">                <span class="attr">"security"</span>: <span class="string">"auto"</span></span><br><span class="line">              &#125;</span><br><span class="line">            ]</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="attr">"network"</span>: <span class="string">"tcp"</span>,</span><br><span class="line">        <span class="attr">"tcpSettings"</span>: &#123;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"transport"</span>: &#123;</span><br><span class="line">    <span class="attr">"kcpSettings"</span>: &#123;</span><br><span class="line">      <span class="attr">"uplinkCapactiy"</span>: <span class="number">100</span>,</span><br><span class="line">      <span class="attr">"downlinkCapacity"</span>: <span class="number">100</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"dns"</span>: &#123;</span><br><span class="line">    <span class="attr">"servers"</span>: [</span><br><span class="line">      <span class="string">"8.8.8.8"</span>,</span><br><span class="line">      <span class="string">"8.8.4.4"</span>,</span><br><span class="line">      <span class="string">"localhost"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="自动代理配置"><a href="#自动代理配置" class="headerlink" title="自动代理配置"></a>自动代理配置</h2><p>上面的配置只是配置好了网络请求转发，以及<code>socks</code>和<code>http</code>代理配置。浏览器已经可以通过设置<code>socks</code>或<code>http</code>代理地址(路由器ip地址)来访问网页了。但是要自动为接入家庭网络的所有设备以及应用代理网络请求，还需要一些额外配置</p>
+<h3 id="DNS请求代理"><a href="#DNS请求代理" class="headerlink" title="DNS请求代理"></a>DNS请求代理</h3><p><code>国家防火墙</code>不光会直接封IP地址，同时也会将域名解析为错误的IP地址，所以首先要确保<code>DNS</code>解析正确。(<code>Chrome</code>浏览器设置<code>socks</code>代理后，<code>DNS</code>也会走代理)</p>
+<h4 id="使用Dnsmasq"><a href="#使用Dnsmasq" class="headerlink" title="使用Dnsmasq"></a>使用Dnsmasq</h4><p><code>edgeos</code>从1.9版本开始支持<code>dnsmasq</code>作为<code>dns</code>服务器。<code>ubnt</code>提供了设置文档<a href="https://help.ubnt.com/hc/en-us/articles/115002673188-EdgeRouter-Using-dnsmasq-for-DHCP-Server" target="_blank" rel="noopener">EdgeRouter-Using-dnsmasq-for-DHCP-Server</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ssh需在ubnt账号下运行或者直接网页端的cli界面</span></span><br><span class="line">configure</span><br><span class="line"><span class="built_in">set</span> service dhcp-server use-dnsmasq <span class="built_in">enable</span> </span><br><span class="line">commit</span><br><span class="line">save</span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">configure</span><br><span class="line"><span class="built_in">set</span> system name-server 127.0.0.1</span><br><span class="line"><span class="built_in">set</span> service dns forwarding cache-size 400</span><br><span class="line"><span class="built_in">set</span> service dns forwarding listen-on eth1</span><br><span class="line"><span class="built_in">set</span> service dns forwarding listen-on switch0</span><br><span class="line"><span class="built_in">set</span> system domain-name ubnt.home</span><br><span class="line"><span class="comment"># 内网地址解析</span></span><br><span class="line"><span class="built_in">set</span> service dns forwarding options address=/gitlab.ubnt.home/192.168.10.xxx</span><br><span class="line"><span class="built_in">set</span> service dns forwarding options no-resolv</span><br><span class="line"><span class="built_in">set</span> service dns forwarding options listen-address=192.168.10.1</span><br><span class="line"><span class="comment"># dns解析请求转发到V2ray</span></span><br><span class="line"><span class="built_in">set</span> service dns forwarding options server=127.0.0.1<span class="comment">#43606</span></span><br><span class="line"><span class="comment"># 特定域名指定dns服务器，不转发到V2ray</span></span><br><span class="line"><span class="built_in">set</span> service dns forwarding options server=/.bombsquadgame.com/114.114.114.114</span><br><span class="line"><span class="comment"># 解析的域名地址放在noproxy ipset中</span></span><br><span class="line"><span class="built_in">set</span> service dns forwarding options ipset=/.bombsquadgame.com/noproxy</span><br><span class="line">commit</span><br><span class="line">save</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<h4 id="国内域名解析加速"><a href="#国内域名解析加速" class="headerlink" title="国内域名解析加速"></a>国内域名解析加速</h4><p>上面<code>dns</code>配置会将除特定域名以外的<code>dns</code>请求都通过<code>V2ray</code>转发。但是国内域名的解析不会被防火墙干扰，因此也走代理的话，会导致国内网络请求变慢。网络上有有专门整理好的国内域名列表，下面脚本会自动配置<code>dnsmasq</code>，将国内域名解析都指定为<code>114.114.114.114</code>服务器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line">WORKDIR=<span class="string">"<span class="variable">$(mktemp -d)</span>"</span></span><br><span class="line">SERVERS=(114.114.114.114 114.114.115.115 180.76.76.76)</span><br><span class="line"><span class="comment"># Not using best possible CDN pop: 1.2.4.8 210.2.4.8 223.5.5.5 223.6.6.6</span></span><br><span class="line"><span class="comment"># Dirty cache: 119.29.29.29 182.254.116.116</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># CONF_WITH_SERVERS=(accelerated-domains.china google.china apple.china)</span></span><br><span class="line">CONF_WITH_SERVERS=(accelerated-domains.china apple.china)</span><br><span class="line">CONF_SIMPLE=(bogus-nxdomain.china)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Downloading latest configurations..."</span></span><br><span class="line">git <span class="built_in">clone</span> --depth=1 https://git.coding.net/felixonmars/dnsmasq-china-list.git <span class="string">"<span class="variable">$WORKDIR</span>"</span></span><br><span class="line"><span class="comment">#git clone --depth=1 https://github.com/felixonmars/dnsmasq-china-list.git "$WORKDIR"</span></span><br><span class="line"><span class="comment">#git clone --depth=1 https://bitbucket.org/felixonmars/dnsmasq-china-list.git "$WORKDIR"</span></span><br><span class="line"><span class="comment">#git clone --depth=1 https://git.oschina.net/felixonmars/dnsmasq-china-list.git "$WORKDIR"</span></span><br><span class="line"><span class="comment">#git clone --depth=1 https://gitlab.com/felixonmars/dnsmasq-china-list.git "$WORKDIR"</span></span><br><span class="line"><span class="comment">#git clone --depth=1 https://code.aliyun.com/felixonmars/dnsmasq-china-list.git "$WORKDIR"</span></span><br><span class="line"><span class="comment">#git clone --depth=1 https://code.csdn.net/felixonmars/dnsmasq-china-list.git "$WORKDIR"</span></span><br><span class="line"><span class="comment">#git clone --depth=1 http://repo.or.cz/dnsmasq-china-list.git "$WORKDIR"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Removing old configurations..."</span></span><br><span class="line"><span class="keyword">for</span> _conf <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;CONF_WITH_SERVERS[@]&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;CONF_SIMPLE[@]&#125;</span>"</span>; <span class="keyword">do</span></span><br><span class="line">  rm -f /etc/dnsmasq.d/<span class="string">"<span class="variable">$_conf</span>"</span>*.conf</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Installing new configurations..."</span></span><br><span class="line"><span class="keyword">for</span> _conf <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;CONF_SIMPLE[@]&#125;</span>"</span>; <span class="keyword">do</span></span><br><span class="line">  cp <span class="string">"<span class="variable">$WORKDIR</span>/<span class="variable">$_conf</span>.conf"</span> <span class="string">"/etc/dnsmasq.d/<span class="variable">$_conf</span>.conf"</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _server <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;SERVERS[@]&#125;</span>"</span>; <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">for</span> _conf <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;CONF_WITH_SERVERS[@]&#125;</span>"</span>; <span class="keyword">do</span></span><br><span class="line">    cp <span class="string">"<span class="variable">$WORKDIR</span>/<span class="variable">$_conf</span>.conf"</span> <span class="string">"/etc/dnsmasq.d/<span class="variable">$_conf</span>.<span class="variable">$_server</span>.conf"</span></span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  sed -i <span class="string">"s|^\(server.*\)/[^/]*$|\1/<span class="variable">$_server</span>|"</span> /etc/dnsmasq.d/*.<span class="string">"<span class="variable">$_server</span>"</span>.conf</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Restarting dnsmasq service..."</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">hash</span> systemctl 2&gt;/dev/null; <span class="keyword">then</span></span><br><span class="line">  systemctl restart dnsmasq</span><br><span class="line"><span class="keyword">elif</span> <span class="built_in">hash</span> service 2&gt;/dev/null; <span class="keyword">then</span></span><br><span class="line">  service dnsmasq restart</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Now please restart dnsmasq since I don't know how to do it."</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Cleaning up..."</span></span><br><span class="line">rm -r <span class="string">"<span class="variable">$WORKDIR</span>"</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>将脚本放在目录中<code>/config/scripts/post-config.d</code>下，这样在路由重启后会自动运行</p>
+</blockquote>
+<h3 id="IP数据包自动转发"><a href="#IP数据包自动转发" class="headerlink" title="IP数据包自动转发"></a>IP数据包自动转发</h3><p><code>dns</code>走代理解析正确后，剩下就是让<code>IP</code>数据包自动走代理。同样的也希望国内IP的数据包不走代理，国外IP地址的数据包自动走代理。</p>
+<p>下面脚本基于<code>ipset</code>以及<code>iptables</code>实现了如下功能:</p>
+<ol>
+<li>创建中国IP地址集以及noproxy(特定IP地址不走代理)代理集</li>
+<li>内网数据包直接访问，不走代理</li>
+<li><code>noproxy</code>集中的IP地址都不走代理</li>
+<li>非中国IP地址都走代理</li>
+<li>只有目标端口1-1024的数据包才会被代理(避免代理bt数据包，差不多其他基本网络服务的端口在这个范围内)</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line"><span class="comment"># config set for chinaip</span></span><br><span class="line">WORKDIR=<span class="string">"<span class="variable">$(mktemp -d)</span>"</span></span><br><span class="line">ipset create chinaip <span class="built_in">hash</span>:net -exist</span><br><span class="line">wget -q -O <span class="string">"<span class="variable">$WORKDIR</span>/cn.zone"</span> http://www.ipdeny.com/ipblocks/data/countries/cn.zone</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> $(cat <span class="string">"<span class="variable">$WORKDIR</span>/cn.zone"</span>); <span class="keyword">do</span> ipset add chinaip <span class="variable">$i</span> -exist; <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">ipset create noproxy <span class="built_in">hash</span>:ip -exist</span><br><span class="line"><span class="comment">#pt.gztown.net pt</span></span><br><span class="line"><span class="comment">#ipset add noproxy 104.37.214.75 -exist</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># config for iptables</span></span><br><span class="line">iptables -t nat -N V2RAY</span><br><span class="line">iptables -t nat -A V2RAY -d vps_ip_address -j RETURN</span><br><span class="line">iptables -t nat -A V2RAY -d 0.0.0.0/8 -j RETURN</span><br><span class="line">iptables -t nat -A V2RAY -d 10.0.0.0/8 -j RETURN</span><br><span class="line">iptables -t nat -A V2RAY -d 127.0.0.0/8 -j RETURN</span><br><span class="line">iptables -t nat -A V2RAY -d 169.254.0.0/16 -j RETURN</span><br><span class="line">iptables -t nat -A V2RAY -d 172.16.0.0/12 -j RETURN</span><br><span class="line">iptables -t nat -A V2RAY -d 192.168.0.0/16 -j RETURN</span><br><span class="line">iptables -t nat -A V2RAY -d 224.0.0.0/4 -j RETURN</span><br><span class="line">iptables -t nat -A V2RAY -d 240.0.0.0/4 -j RETURN</span><br><span class="line">iptables -t nat -A V2RAY -m <span class="built_in">set</span> --match-set noproxy dst -p tcp -j RETURN</span><br><span class="line">iptables -t nat -A V2RAY -m <span class="built_in">set</span> ! --match-set chinaip dst -p tcp -j REDIRECT --to-ports 43605</span><br><span class="line">iptables -t nat -A OUTPUT -p tcp --dport 1:1024 -j V2RAY</span><br><span class="line">iptables -t nat -A PREROUTING -s 192.168.0.0/16 -p tcp --dport 1:1024 -j V2RAY</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>同样为了在路由重启后自动运行改脚本，需要将脚本放在<code>/config/scripts/post-config.d</code>目录下</p>
+</blockquote>
+<h2 id="VPN配置"><a href="#VPN配置" class="headerlink" title="VPN配置"></a>VPN配置</h2><p>家庭路由自动代理配置完成后，只有当设备连入家里的路由才能自动代理。家里之外的设备怎么办呢？最方便的就是通过<code>VPN</code>，因为不管手机或者PC都支持VPN。</p>
+<p><code>edgeos</code>配置<code>VPN</code>参考官方文档<a href="https://help.ubnt.com/hc/en-us/articles/204950294-EdgeRouter-L2TP-IPsec-VPN-Server" target="_blank" rel="noopener">https://help.ubnt.com/hc/en-us/articles/204950294-EdgeRouter-L2TP-IPsec-VPN-Server</a>。建议<code>VPN</code>就使用<code>L2tp/IPsec</code>协议，<code>Android</code>和<code>IOS</code>系统默认都支持该协议</p>
+<p><code>VPN</code>配置好后，在外的设备连接<code>VPN</code>，就能自动代理了。</p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/VPS/" rel="tag"># VPS</a>
+          
+            <a href="/tags/Vultr/" rel="tag"># Vultr</a>
+          
+            <a href="/tags/EdgeOS/" rel="tag"># EdgeOS</a>
+          
+            <a href="/tags/V2ray/" rel="tag"># V2ray</a>
+          
+            <a href="/tags/Proxy/" rel="tag"># Proxy</a>
+          
+            <a href="/tags/iptables/" rel="tag"># iptables</a>
+          
+            <a href="/tags/ipset/" rel="tag"># ipset</a>
+          
+            <a href="/tags/dnsmasq/" rel="tag"># dnsmasq</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+               <div id="needsharebutton-postbottom">
+                 <span class="btn">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                 </span>
+               </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/26/技术/Flask/flask-uwsgi-deployment/" rel="next" title="Flask部署">
+                <i class="fa fa-chevron-left"></i> Flask部署
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/28/visual-studio-parallel-compile-setup/" rel="prev" title="VisualStudio并行编译设置">
+                VisualStudio并行编译设置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Author</p>
+              <p class="site-description motion-element" itemprop="description">希望能够每天提升一点~~~</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/pzxbc" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:pzxbc@qq.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-nd.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动代理解决方案框架图"><span class="nav-number">1.</span> <span class="nav-text">自动代理解决方案框架图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器配置"><span class="nav-number">2.</span> <span class="nav-text">服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装V2ray"><span class="nav-number">2.1.</span> <span class="nav-text">安装V2ray</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置V2ray"><span class="nav-number">2.2.</span> <span class="nav-text">配置V2ray</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#V2ray服务启动"><span class="nav-number">2.3.</span> <span class="nav-text">V2ray服务启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由器配置"><span class="nav-number">3.</span> <span class="nav-text">路由器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#V2ray安装"><span class="nav-number">3.1.</span> <span class="nav-text">V2ray安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#V2ray配置"><span class="nav-number">3.2.</span> <span class="nav-text">V2ray配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动代理配置"><span class="nav-number">4.</span> <span class="nav-text">自动代理配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS请求代理"><span class="nav-number">4.1.</span> <span class="nav-text">DNS请求代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Dnsmasq"><span class="nav-number">4.1.1.</span> <span class="nav-text">使用Dnsmasq</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#国内域名解析加速"><span class="nav-number">4.1.2.</span> <span class="nav-text">国内域名解析加速</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP数据包自动转发"><span class="nav-number">4.2.</span> <span class="nav-text">IP数据包自动转发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VPN配置"><span class="nav-number">5.</span> <span class="nav-text">VPN配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Author</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">86k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:23</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'EzRRCR6TWWbI6tznEWKbd5MH-gzGzoHsz',
+        appKey: 'rWMYX8Xg9HiykSb6BrfvF0fD',
+        placeholder: 'Just go go',
+        avatar:'wavatar',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: true
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
